@@ -1,4 +1,5 @@
 const { test, expect } = require("@playwright/test");
+const { sign } = require("crypto");
 
 test("TC title", async ({ page }) => {
   // await page.goto("https://rahulshettyacademy.com/AutomationPractice/");
@@ -17,15 +18,23 @@ test("Test case 1", async ({ page }) => {
 });
 
 test.only("Login Page", async ({ page }) => {
+  const userName = page.locator("input#username");
+  const password = page.locator("[type='password']");
+  const signIn = page.locator("input#signInBtn");
   await page.goto("https://rahulshettyacademy.com/loginpagePractise/");
-  await page.locator("input#username").fill("rahulshettyacademy ");
-  await page.locator("[type='password']").fill("learnin");
-  await page.locator("input[type='radio'][value='admin']").click();
-  await page.locator("input[type='checkbox']").check();
-  await page.locator("input#signInBtn").click();
-  // console.log(await page.locator("[style*='block']").textContent());
+  await userName.fill("rahulshettyacademy ");
+  await password.fill("learn");
+  await signIn.click();
   await expect(page.locator("[style*='block']")).toContainText(
     "Incorrect username/password"
   );
+  await userName.fill("");
+  await password.fill("");
+  await userName.fill("rahulshettyacademy");
+  await password.fill("learning");
+  await page.locator("input[type='radio'][value='admin']").click();
+  await page.locator("input[type='checkbox']").check();
+  signIn.click();
+  // console.log(await page.locator("[style*='block']").textContent());
   await page.waitForTimeout(10000);
 });
