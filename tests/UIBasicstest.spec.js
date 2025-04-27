@@ -16,7 +16,7 @@ test("Test case 1", async ({ page }) => {
   await expect(page).toHaveTitle("Google");
 });
 
-test.only("Login Page", async ({ page }) => {
+test("Login Page", async ({ page }) => {
   const userName = page.locator("input#username");
   const password = page.locator("[type='password']");
   const signIn = page.locator("input#signInBtn");
