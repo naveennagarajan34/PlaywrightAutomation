@@ -1,6 +1,6 @@
 const { test, expect } = require("@playwright/test");
 
-test.only("Login and verify", async ({ page }) => {
+test("Login and verify", async ({ page }) => {
   await page.goto("https://rahulshettyacademy.com/client");
   const emailField = page.locator("input[type='email']");
   const password = page.locator("input[type='password']");
@@ -11,5 +11,8 @@ test.only("Login and verify", async ({ page }) => {
   await expect(page.locator("div[id='toast-container']")).toHaveText(
     "Login Successfully"
   );
+  await page.locator("div.card-body b").first().waitFor();
+  const productTitles = await page.locator("div.card-body b").allTextContents();
+  console.log(productTitles);
   await page.waitForTimeout(5000);
 });
