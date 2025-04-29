@@ -1,5 +1,5 @@
 // @ts-check
-import { chromium, defineConfig, devices } from '@playwright/test';
+import { chromium, defineConfig, devices } from "@playwright/test";
 
 /**
  * Read environment variables from file.
@@ -12,18 +12,19 @@ import { chromium, defineConfig, devices } from '@playwright/test';
 /**
  * @see https://playwright.dev/docs/test-configuration
  */
-const config = ({
-  testDir: './tests',
+const config = {
+  testDir: "./tests",
   timeout: 60 * 1000,
   expect: {
-    timeout: 10 * 1000
+    timeout: 10 * 1000,
   },
-  reporter : 'html',
+  reporter: "html",
   use: {
-    browserName: 'firefox',
-    headless : false
-  }
- });
+    browserName: "chromium",
+    headless: false,
+    screenshot: "on",
+    trace: "retain-on-failure", // off, on, retain-on-failure
+  },
+};
 
- module.exports = config
-
+module.exports = config;
