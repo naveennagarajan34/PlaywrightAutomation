@@ -61,7 +61,7 @@ test("Handling dropdown and checkbox", async ({ page }) => {
   // await signInBtn.click();
 });
 
-test.only("Child Window", async ({ browser }) => {
+test("Child Window", async ({ browser }) => {
   const context = await browser.newContext();
   const page = await context.newPage();
   await page.goto("https://rahulshettyacademy.com/loginpagePractise/");
