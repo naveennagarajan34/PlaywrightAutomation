@@ -1,6 +1,6 @@
 const { test, expect } = require("@playwright/test");
 
-test("Login and verify", async ({ page }) => {
+test.only("Login and verify", async ({ page }) => {
   const email = "naveennagarajan34@gmail.com";
   const pwd = "Naveen@123";
   const neededProduct = "ZARA COAT 3";
@@ -47,9 +47,22 @@ test("Login and verify", async ({ page }) => {
   await expect(page.locator(".hero-primary")).toHaveText(
     " Thankyou for the order. "
   );
-  const orderId = await page
+  let orderId = await page
     .locator(".em-spacer-1 .ng-star-inserted")
     .textContent();
+  orderId = orderId.replace(/\|/g, "").trim();
   console.log(orderId);
+  await page.locator("button[routerlink*='myorders']").click();
+  await page.waitForTimeout(10000); // pauses for 5000 ms = 10 seconds
+  const orderIds = await page.locator("tbody tr th").allTextContents();
+  console.log(orderIds);
+  expect(orderIds).toContain(orderId);
+  await page
+    .locator(
+      `//th[contains(text(),'${orderId}')]/parent::tr//button[text()='Delete']`
+    )
+    .click();
   await page.waitForTimeout(10000);
 });
+
+//th[contains(text(),'6822015afd2af1c99e1c73dd')]/parent::tr//button[text()='Delete']

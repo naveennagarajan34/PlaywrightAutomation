@@ -18,7 +18,7 @@ test.beforeAll(async () => {
   token = loginResponseJson.token;
 });
 
-test.only("Login Using Api token", async ({ page }) => {
+test("Login Using Api token", async ({ page }) => {
   page.addInitScript((value) => {
     window.localStorage.setItem("token", value);
   }, token);
