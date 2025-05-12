@@ -1,6 +1,6 @@
 const { test, expect } = require("@playwright/test");
 
-test.only("Login and verify", async ({ page }) => {
+test("Login and verify", async ({ page }) => {
   const email = "naveennagarajan34@gmail.com";
   const pwd = "Naveen@123";
   const neededProduct = "ZARA COAT 3";
