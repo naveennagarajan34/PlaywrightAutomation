@@ -1,6 +1,6 @@
 const { test, expect } = require("@playwright/test");
 
-test.only("Pop up and Frames", async ({ page }) => {
+test("Pop up and Frames", async ({ page }) => {
   await page.goto("https://rahulshettyacademy.com/AutomationPractice/");
   expect(await page.locator("#displayed-text")).toBeVisible();
   await page.locator("#hide-textbox").click();
